@@ -7,7 +7,7 @@ WIDTH = 100 # number of data points to chart
 app = Flask(__name__)
 
 def generatePage(name, image):
-  string = "<html><head><title>"+name+"</title></head><body><img src="+image+"></body></html>
+  string = "<html><head><title>"+name+"</title></head><body><img src="+image+"></body></html>"
   return(string)
 
 @app.route("/")
