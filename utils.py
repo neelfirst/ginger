@@ -2,7 +2,7 @@
 
 from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
-import pandas, numpy
+import numpy
 
 BASEPATH = "./images/"
 
@@ -20,8 +20,12 @@ def check_date(d:str):
   return True
 
 def create_plot(data, name='', xlabel='date', ylabel='close'):
-  df = pandas.DataFrame()
-  df = pandas.json_normalize(data)
+  df = dict()
+  for k in d[0].keys():
+    v = []
+    for j in range(0,len(d)):
+      v.append(d[j][k])
+    df[k] = v
 
   f = plt.figure()
   plt.plot(df[xlabel].to_numpy(), df[ylabel].to_numpy(), label=name)
