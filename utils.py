@@ -30,7 +30,4 @@ def getStockPlot(data, name='', xlabel='date', ylabel='close', volume='no'):
   f = plt.figure()
   plt.plot(df[xlabel], df[ylabel], label=name)
   plt.legend()
-#  path = BASEPATH + name + ".png"
-  path = "../images/"+name+".png"
-  plt.savefig(path)
-  return(path)
+  return f

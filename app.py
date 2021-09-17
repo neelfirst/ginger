@@ -1,4 +1,5 @@
-from flask import Flask
+import os, io
+from flask import Flask, request, url_for, render_template, send_file
 from tradier import *
 from utils import *
 
@@ -7,12 +8,16 @@ WIDTH = 100 # number of data points to chart
 app = Flask(__name__)
 
 def generatePage(name, image):
-  string = "<html><head><title>"+name+"</title></head><body><img src="+image+"></body></html>"
+  p = os.path.join(os.getcwd(), 'static',  name + '.png')
+  image.savefig(p)
+  img = url_for('static', filename=name+'.png')
+  string = "<html><head><title>"+name+"</title></head><body><img src=\""+img+"\"></body></html>"
   return(string)
 
 @app.route("/")
 def hello():
-  return('there is no spoon')
+  string = "<form method=\"POST\"><input name=\"text\"><input type=\"submit\"></form>"
+  return(string)
 
 @app.route("/<string:name>/")
 def say_hello(name):

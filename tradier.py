@@ -34,7 +34,7 @@ def getStockHistory(symbol, start, stop, interval = 'daily'):
     raise ValueError("poorly ordered date range")
 
   endpoint = ENDPT_ROOT + "markets/history"
-  params = {'symbol': symbol, 'interval': interval, 'start': start, 'stop': stop}
+  params = {'symbol': symbol, 'interval': interval, 'start': start, 'end': stop}
   r = getJsonResponse(endpoint, HEADER, params)
   if (interval == 'daily'):
     return r['history']['day']
