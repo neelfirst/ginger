@@ -2,9 +2,9 @@
 
 from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
-import numpy
-
-BASEPATH = "/home/neeljymx/ginger/images/"
+import numpy, pandas, io
+import mplfinance as mpf
+import matplotlib.dates as mpl_dates
 
 def timedeltaYears(entry, now):
   d1 = datetime.fromisoformat(entry)
@@ -19,15 +19,13 @@ def check_date(d:str):
     return False
   return True
 
-def getStockPlot(data, name='', xlabel='date', ylabel='close', volume='no'):
-  df = dict()
-  for k in data[0].keys():
-    v = []
-    for j in range(0,len(data)):
-      v.append(data[j][k])
-    df[k] = numpy.array(v)
+def getStockPlot(data, name='', volume='no'):
+  df = pandas.DataFrame()
+  df = pandas.json_normalize(data)
+  df['date'] = pandas.to_datetime(df['date'], format="%Y-%m-%d")
+  df = df.set_index('date')
 
-  f = plt.figure()
-  plt.plot(df[xlabel], df[ylabel], label=name)
-  plt.legend()
-  return f
+  buf = io.BytesIO()
+  mpf.plot(df, type='candle', savefig=buf)
+  buf.seek(0)
+  return buf

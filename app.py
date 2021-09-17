@@ -9,7 +9,8 @@ app = Flask(__name__)
 
 def generatePage(name, image):
   p = os.path.join(os.getcwd(), 'static',  name + '.png')
-  image.savefig(p)
+  with open(p,'wb') as ifile:
+    ifile.write(image.read())
   img = url_for('static', filename=name+'.png')
   string = "<html><head><title>"+name+"</title></head><body><img src=\""+img+"\"></body></html>"
   return(string)
@@ -24,7 +25,7 @@ def say_hello(name):
   start = str((datetime.now() - timedelta(days=WIDTH)).date())
   stop = str(datetime.now().date())
   stock_data = getStockHistory(name, start, stop, interval='daily')
-  stock_plot = getStockPlot(stock_data, name, 'date', 'close', volume="no")
+  stock_plot = getStockPlot(stock_data, name, volume="no")
   stock_page = generatePage(name, stock_plot)
   return stock_page
 
