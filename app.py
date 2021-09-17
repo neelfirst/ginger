@@ -16,8 +16,8 @@ def hello():
 
 @app.route("/<string:name>/")
 def say_hello(name):
-  start = (datetime.now() - timedelta(days=WIDTH)).date
-  stop = datetime.now().date
+  start = str((datetime.now() - timedelta(days=WIDTH)).date())
+  stop = str(datetime.now().date())
   stock_data = getStockHistory(name, start, stop, interval='daily')
   stock_plot = getStockPlot(stock_data, name, 'date', 'close', volume="no")
   stock_page = generatePage(name, stock_plot)

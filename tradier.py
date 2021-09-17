@@ -35,7 +35,7 @@ def getStockHistory(symbol, start, stop, interval = 'daily'):
 
   endpoint = ENDPT_ROOT + "markets/history"
   params = {'symbol': symbol, 'interval': interval, 'start': start, 'stop': stop}
-  r = getJsonResponse(endpoint. HEADER, params)
+  r = getJsonResponse(endpoint, HEADER, params)
   if (interval == 'daily'):
     return r['history']['day']
   elif (interval == 'weekly'):

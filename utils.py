@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 import numpy
 
-BASEPATH = "./images/"
+BASEPATH = "/home/neeljymx/ginger/images/"
 
 def timedeltaYears(entry, now):
   d1 = datetime.fromisoformat(entry)
@@ -19,17 +19,18 @@ def check_date(d:str):
     return False
   return True
 
-def create_plot(data, name='', xlabel='date', ylabel='close'):
+def getStockPlot(data, name='', xlabel='date', ylabel='close', volume='no'):
   df = dict()
-  for k in d[0].keys():
+  for k in data[0].keys():
     v = []
-    for j in range(0,len(d)):
-      v.append(d[j][k])
-    df[k] = v
+    for j in range(0,len(data)):
+      v.append(data[j][k])
+    df[k] = numpy.array(v)
 
   f = plt.figure()
-  plt.plot(df[xlabel].to_numpy(), df[ylabel].to_numpy(), label=name)
+  plt.plot(df[xlabel], df[ylabel], label=name)
   plt.legend()
-  path = BASEPATH + name + ".svg"
+#  path = BASEPATH + name + ".png"
+  path = "../images/"+name+".png"
   plt.savefig(path)
   return(path)
