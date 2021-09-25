@@ -13,7 +13,7 @@ def generatePage(name, images):
     p = os.path.join(os.getcwd(), 'static',  name + str(i) + '.png')
     with open(p,'wb') as ifile:
       ifile.write(images[i].read())
-    img = url_for('static', filename=name+'.png')
+    img = url_for('static', filename=name+str(i)+'.png')
     string += "<img src=\""+img+"\"><br>"
   string += "</body></html>"
   return(string)
