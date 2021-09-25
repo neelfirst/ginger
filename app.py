@@ -3,7 +3,7 @@ from flask import Flask, request, url_for, render_template, send_file
 from tradier import *
 from utils import *
 
-INTERVALS = {'daily': 200, 'weekly': 100}
+INTERVALS = {'daily': 200, 'weekly': 400}
 
 app = Flask(__name__)
 
