@@ -39,9 +39,9 @@ def getStockHistory(symbol, start, stop, interval = 'daily'):
   if (interval == 'daily'):
     return r['history']['day']
   elif (interval == 'weekly'):
-    return r['history']['week'] # TODO: UNTESTED
+    return r['history']['day']
   elif (interval == 'monthly'):
-    return r['history']['month'] # TODO: UNTESTED
+    return r['history']['day'] # TODO: UNTESTED
   else:
     return None
 
