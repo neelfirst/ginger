@@ -1,5 +1,5 @@
 import os, io
-from flask import Flask, request, url_for, render_template, send_file
+from flask import Flask, request, url_for, render_template, send_file, redirect
 from tradier import *
 from utils import *
 
@@ -22,6 +22,10 @@ def generatePage(name, images):
 def hello():
   string = "<form method=\"POST\"><input name=\"text\"><input type=\"submit\"></form>"
   return(string)
+
+@app.route("/", methods=['POST'])
+def search():
+  return redirect(url_for('say_hello', name = request.form['text']))
 
 @app.route("/<string:name>/")
 def say_hello(name):

@@ -27,7 +27,7 @@ def getStockPlot(data, name='', volume='no'):
 
   buf = io.BytesIO()
   if (volume == 'yes'):
-    mpf.plot(df, type='candle', figratio=(16.00,8.00), , volume=True, savefig=buf)
+    mpf.plot(df, type='candle', figratio=(16.00,8.00), volume=True, savefig=buf)
   else:
     mpf.plot(df, type='candle', figratio=(16.00,5.75), savefig=buf)
   buf.seek(0)
